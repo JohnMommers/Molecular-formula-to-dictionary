@@ -1,0 +1,19 @@
+import re
+
+# This simple function converts a molecular formula into
+# a dictionary containing: ELEMENT(str) : COUNT(int)
+# C10H22O2Cl --> 'C':10, 'H':22, 'O':2, 'Cl':1
+
+def form_to_dict(form_string):
+  form = form_string
+  x = re.findall('[A-Z][a-z]\d*|[A-Z]\d*',form)
+  d = {}
+  for i in x:
+    element = re.search('[A-Z][a-z]|[A-Z]', i)
+    count = re.search('[0-9]+',i)
+    e = str(element.group())
+    if count is not None:
+      d[e] = int(count.group())
+    else:
+      d[e] = 1
+  return d
